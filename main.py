@@ -41,6 +41,12 @@ def getTemps():
         loggers["temp"].info(data)
 
 
+@app.on_event("startup")
+async def startup():
+    site.mount_app(app)
+    scheduler.start()
+
+
 def getLogger(filename: str):
     logger = logging.getLogger()
     logger.setLevel(logging.INFO)
