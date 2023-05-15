@@ -54,6 +54,6 @@ def getLogger(filename: str):
 
 
 if __name__ == '__main__':
-    schedule.every(15).minutes.do(getTemps, logger=getLogger("temps.log"))
+    schedule.every(15).seconds.do(getTemps, logger=getLogger("temps.log"))
 
     uvicorn.run(app, host="0.0.0.0", port=2002)
