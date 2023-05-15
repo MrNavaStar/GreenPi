@@ -28,9 +28,11 @@ async def websocket(ws: WebSocket):
 
 
 def getTemps(logger):
+    print("doing temps")
     sensors = DS18B20.get_all_sensors()
     for sensor in sensors:
         data = f"temp+{sensor.get_id()}:{sensor.get_temperature()}"
+        print(data)
         data_queue.put(data)
         logger.info(data)
 
