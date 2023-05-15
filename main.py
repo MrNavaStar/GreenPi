@@ -3,6 +3,7 @@ import sys
 import uvicorn
 from fastapi import FastAPI
 from starlette.websockets import WebSocket
+from starlette.responses import PlainTextResponse
 from queue import Queue
 from ds18b20 import DS18B20
 import schedule
@@ -15,7 +16,7 @@ data_queue = Queue()
 @app.get("/sensor")
 def sensorData():
     with open("temps.log") as file:
-        return file.read()
+        return PlainTextResponse(file.read())
 
 
 @app.websocket("/ws")
