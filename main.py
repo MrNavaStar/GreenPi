@@ -13,9 +13,9 @@ app = FastAPI()
 data_queue = Queue()
 
 
-@app.get("/sensor")
-def sensorData():
-    with open("temps.log") as file:
+@app.get("/sensor/{log}")
+def sensorData(log):
+    with open(f"logs/{log}.log") as file:
         return PlainTextResponse(file.read())
 
 
@@ -54,6 +54,6 @@ def getLogger(filename: str):
 
 
 if __name__ == '__main__':
-    schedule.every(15).seconds.do(getTemps, logger=getLogger("temps.log"))
+    schedule.every(15).seconds.do(getTemps, logger=getLogger("logs/temp.log"))
 
     uvicorn.run(app, host="0.0.0.0", port=2002)
