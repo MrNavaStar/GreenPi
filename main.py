@@ -29,7 +29,7 @@ async def websocket(ws: WebSocket):
             await ws.send_text(data_queue.get())
 
 
-@scheduler.scheduled_job('interval', seconds=5)
+@scheduler.scheduled_job('interval', minutes=15)
 def getTemps():
     sensors = DS18B20.get_all_sensors()
     for sensor in sensors:
